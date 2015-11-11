@@ -13,8 +13,11 @@ mysqldump nome_do_seu_banco > $name_file.sql -u seu_usuario_aqui -p sua_senha_aq
 #Gera o nome da pasta baseado no mês e ano atual (padrão)
 name_dir=`date +%m_%Y`
 
-#Cria a pasta correspondente
-mkdir $name_dir
+#Caso a pasta não exista
+if [ ! -d "$name_dir" ]; then
+   #Cria a pasta correspondente
+   mkdir $name_dir
+fi
 
 #Move o arquivo criado para a pasta criada
 mv $name_file.sql $name_dir/
