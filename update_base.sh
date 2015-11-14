@@ -22,10 +22,24 @@ fi
 #Move o arquivo criado para a pasta criada
 mv $name_file.sql $name_dir/
 
+#Pergunta se o dump é para ser enviado para o repositório remoto
+echo "Deseja mandar a base para o repositório? (s/n)"
+read resp;
 
-#Comandos do git para enviar a base
-git add .
+#Testa a resposta do usuário
+if test $resp = s then	
+    #Comandos do git para enviar a base
+    git add .
+    
+    git commit -m "Dump da base - Gerado Via Script"
 
-git commit -m "Dump da base - Gerado Via Script"
+    git push origin master
 
-git push origin master
+    echo "Dump feito e enviado para o repositório"
+
+elif test $resp = n then
+    echo "Dump feito mas não enviado para o repositório"
+else 
+    echo "Comando inválido"
+fi
+
